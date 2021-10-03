@@ -5,8 +5,8 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "CommandManagerMixin",
-    "MinecraftServerMixin",
-    "TextRendererMixin"
+    "HandledScreenMixin",
+    "MinecraftServerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
