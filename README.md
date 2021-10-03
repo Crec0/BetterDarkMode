@@ -17,4 +17,4 @@ If you have any questions or feature requests, feel free to contact me
 
 ## Contact
 You can contact me by making an issue on this repo Or message me on discord at `Crec0#0420`. 
-I usually hang in [SciCraft](http://discord.gg/SciCraft) and [Mindtech](https://discord.gg/4fAAYw7P3s) discord servers.
+I can be found lurking in [SciCraft](http://discord.gg/SciCraft) and [Mindtech](https://discord.gg/4fAAYw7P3s) discord servers.
