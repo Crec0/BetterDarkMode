@@ -11,7 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class Util {
-    public static int getRGB(int r, int b, int g) {
+    public static int getRGB(int r, int g, int b) {
         return ((r & 0x0ff) << 16) | ((g & 0x0ff) << 8) | (b & 0x0ff);
     }
 
