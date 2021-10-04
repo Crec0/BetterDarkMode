@@ -2,7 +2,11 @@ package betterdarkmode.util;
 
 import betterdarkmode.BetterDarkMode;
 import betterdarkmode.Configs;
-import net.minecraft.util.WorldSavePath;
+import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,13 +21,10 @@ public class Util {
 
     private static Path getSaveFile() {
         try {
-            Path saveFile = BetterDarkMode.INSTANCE.MINECRAFT_SERVER.getSavePath(WorldSavePath.ROOT)
-                                                                    .getParent()
-                                                                    .getParent()
-                                                                    .getParent()
-                                                                    .resolve("config")
-                                                                    .resolve("BetterDarkMode")
-                                                                    .resolve("selected_color.conf");
+            Path saveFile = FabricLoader.getInstance()
+                                        .getConfigDir()
+                                        .resolve("BetterDarkMode")
+                                        .resolve("selected_color.conf");
             if (!Files.exists(saveFile.getParent())) Files.createDirectory(saveFile.getParent());
             if (!Files.exists(saveFile)) Files.createFile(saveFile);
             return saveFile;
@@ -43,7 +44,6 @@ public class Util {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.matches("\\d+")) {
-                    System.out.println(line);
                     Configs.SELECTED_COLOR = Integer.parseInt(line.trim());
                 }
             }
@@ -67,5 +67,24 @@ public class Util {
             BetterDarkMode.LOGGER.error("Failed to write save file.");
             e.printStackTrace();
         }
+    }
+
+    public static void sendMessage(Text message) {
+        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(message);
+    }
+
+    public static ClientPlayerEntity getPlayer() {
+        return MinecraftClient.getInstance().player;
+    }
+
+    public static Text getCleanText(Text text) {
+        StringBuilder builder = new StringBuilder();
+        boolean skipNext = false;
+        for (char c : text.getString().toCharArray()) {
+            if (skipNext) skipNext = false;
+            else if (c == '§') skipNext = true;
+            else builder.append(c);
+        }
+        return new LiteralText(builder.toString());
     }
 }

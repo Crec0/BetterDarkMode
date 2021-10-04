@@ -4,9 +4,13 @@
   "package": "betterdarkmode.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "CommandManagerMixin",
-    "HandledScreenMixin",
-    "MinecraftServerMixin"
+    "ClientPlayerEntityMixin",
+    "ClientPlayNetworkHandlerMixin",
+    "MinecraftClientMixin",
+    "screens.CreativeInventoryScreenMixin",
+    "screens.HandledScreenMixin",
+    "screens.InventoryScreenMixin",
+    "screens.MerchantScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1
