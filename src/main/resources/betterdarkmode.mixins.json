@@ -7,10 +7,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayNetworkHandlerMixin",
     "MinecraftClientMixin",
-    "screens.CreativeInventoryScreenMixin",
-    "screens.HandledScreenMixin",
-    "screens.InventoryScreenMixin",
-    "screens.MerchantScreenMixin"
+    "HandledScreensMixin"
   ],
   "injectors": {
     "defaultRequire": 1
