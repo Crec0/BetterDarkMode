@@ -16,5 +16,5 @@ A small client side mod which fixes text color for custom named blocks when usin
 If you have any questions or feature requests, feel free to contact me
 
 ## Contact
-You can contact me by making an issue on this repo Or message me on discord at `Crec0#0420`. 
+You can contact me by making an issue on this repo Or message me on discord at `Crec0#0420`.
 I can be found lurking in [SciCraft](http://discord.gg/SciCraft) and [Mindtech](https://discord.gg/4fAAYw7P3s) discord servers.

@@ -1,53 +1,82 @@
-plugins {
-    id 'fabric-loom' version '0.9.+'
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    }
 }
+
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.spongepowered.mixin'
+
+group = 'betterdarkmode'
+version = '1.0.2-1.17.1'
+
+java {
+    archivesBaseName = 'BetterDarkMode-Forge'
+    toolchain.languageVersion = JavaLanguageVersion.of(16)
+}
+
+minecraft {
+    mappings channel: 'official', version: '1.17.1'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            arg "-mixin.config=betterdarkmode.mixins.json"
+            mods {
+                betterdarkmode {
+                    source sourceSets.main
+                }
+            }
+        }
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'betterdarkmode', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            mods {
+                betterdarkmode {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+mixin {
+    add sourceSets.main, "betterdarkmode.refmap.json"
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
-
-archivesBaseName = project.archives_base_name
-version = project.mod_version+'-v'+new Date().format('yyyyMMdd')
-group = project.maven_group
-
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    minecraft 'net.minecraftforge:forge:1.17.1-37.0.97'
+    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
 
-processResources {
-    inputs.property "version", project.version
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-
-    def targetVersion = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        it.options.release = targetVersion
-    }
-}
-
-// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-// if it is present.
-// If you remove this task, sources will not be generated.
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
-
-java {
-    withSourcesJar()
-}
-
+// Example for how to get properties into the manifest for reading at runtime.
 jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}"}
+    manifest {
+        attributes([
+                "Specification-Title"     : "betterdarkmode",
+                //"Specification-Vendor": "betterdarkmode authors",
+                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                //"Implementation-Vendor": "betterdarkmode authors",
+                "MixinConfigs"            : "betterdarkmode.mixins.json",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }
+
+jar.finalizedBy('reobfJar')

@@ -1,32 +1,20 @@
 package betterdarkmode;
 
 import betterdarkmode.command.CommandBetterDarkMode;
-import betterdarkmode.util.Util;
-import com.mojang.brigadier.CommandDispatcher;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.api.ModInitializer;
-import net.minecraft.server.command.ServerCommandSource;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 
-@Environment(EnvType.CLIENT)
-public class BetterDarkMode implements ModInitializer {
-    public static Logger LOGGER = LogManager.getLogger("BetterDarkMode");
-    public static BetterDarkMode INSTANCE = new BetterDarkMode();
-
-    @Override
-    public void onInitialize() {}
-
-    public void onLoad(){
-        Util.readSaveFile();
+@Mod("betterdarkmode")
+public class BetterDarkMode {
+    public BetterDarkMode() {
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.clientSpec);
+        MinecraftForge.EVENT_BUS.addListener(this::onRegisterCommandEvent);
     }
 
-    public void onShutdown(){
-        Util.writeSaveFile();
-    }
-
-    public void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-        CommandBetterDarkMode.register(dispatcher);
+    public void onRegisterCommandEvent(RegisterCommandsEvent event) {
+        CommandBetterDarkMode.register(event.getDispatcher());
     }
 }
