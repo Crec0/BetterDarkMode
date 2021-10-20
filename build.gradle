@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
@@ -50,7 +50,10 @@ minecraft {
 }
 
 mixin {
-    add sourceSets.main, "betterdarkmode.refmap.json"
+    add sourceSets.main, 'mixins.betterdarkmode.refmap.json'
+    config 'betterdarkmode.mixins.json'
+    debug.verbose = true
+    debug.export = true
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }

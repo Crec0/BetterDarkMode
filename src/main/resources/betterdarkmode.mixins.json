@@ -1,5 +1,6 @@
 {
   "required": true,
+  "refmap": "mixins.betterdarkmode.refmap.json",
   "minVersion": "0.8",
   "package": "betterdarkmode.mixin",
   "compatibilityLevel": "JAVA_16",
