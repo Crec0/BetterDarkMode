@@ -14,15 +14,15 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 
 group = 'betterdarkmode'
-version = '1.0.2-1.17.1'
+version = '1.0.2-1.16.5'
 
 java {
     archivesBaseName = 'BetterDarkMode-Forge'
-    toolchain.languageVersion = JavaLanguageVersion.of(16)
+    toolchain.languageVersion = JavaLanguageVersion.of(JavaVersion.VERSION_1_8.getMajorVersion())
 }
 
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: 'official', version: '1.16.5'
     runs {
         client {
             workingDirectory project.file('run')
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.97'
+    minecraft 'net.minecraftforge:forge:1.16.5-36.2.0'
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 }
 

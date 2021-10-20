@@ -4,14 +4,14 @@ import betterdarkmode.Config;
 import betterdarkmode.Constants;
 import betterdarkmode.util.Util;
 import com.mojang.brigadier.CommandDispatcher;
-import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.command.CommandSource;
 
 import static com.mojang.brigadier.arguments.IntegerArgumentType.integer;
-import static net.minecraft.commands.Commands.argument;
-import static net.minecraft.commands.Commands.literal;
+import static net.minecraft.command.Commands.argument;
+import static net.minecraft.command.Commands.literal;
 
 public class CommandBetterDarkMode {
-    public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
+    public static void register(CommandDispatcher<CommandSource> dispatcher) {
         dispatcher.register(literal("betterdarkmode")
                 .then(literal("white")
                         .executes(c -> {
