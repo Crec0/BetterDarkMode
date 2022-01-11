@@ -18,3 +18,14 @@ If you have any questions or feature requests, feel free to contact me
 ## Contact
 You can contact me by making an issue on this repo Or message me on discord at `Crec0#0420`. 
 I can be found lurking in [SciCraft](http://discord.gg/SciCraft) and [Mindtech](https://discord.gg/4fAAYw7P3s) discord servers.
+
+## YourKit
+![](https://www.yourkit.com/images/yklogo.png)
+
+We appreciate YourKit for providing the project developers licenses of its profiler to help us improve performance! 
+
+YourKit supports open source projects with innovative and intelligent tools
+for monitoring and profiling Java and .NET applications.
+YourKit is the creator of [YourKit Java Profiler](https://www.yourkit.com/java/profiler/),
+[YourKit .NET Profiler](https://www.yourkit.com/.net/profiler/) and
+[YourKit YouMonitor](https://www.yourkit.com/youmonitor), tools for profiling Java and .NET applications.
