@@ -2,11 +2,8 @@
   "required": true,
   "minVersion": "0.8",
   "package": "betterdarkmode.mixin",
-  "compatibilityLevel": "JAVA_16",
+  "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ClientPlayerEntityMixin",
-    "ClientPlayNetworkHandlerMixin",
-    "MinecraftClientMixin",
     "HandledScreensMixin"
   ],
   "injectors": {

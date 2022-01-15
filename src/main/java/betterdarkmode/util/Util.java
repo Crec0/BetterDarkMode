@@ -3,8 +3,6 @@ package betterdarkmode.util;
 import betterdarkmode.BetterDarkMode;
 import betterdarkmode.Configs;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
@@ -21,12 +19,20 @@ public class Util {
 
     private static Path getSaveFile() {
         try {
-            Path saveFile = FabricLoader.getInstance()
-                                        .getConfigDir()
-                                        .resolve("BetterDarkMode")
-                                        .resolve("selected_color.conf");
-            if (!Files.exists(saveFile.getParent())) Files.createDirectory(saveFile.getParent());
-            if (!Files.exists(saveFile)) Files.createFile(saveFile);
+            Path saveFile = FabricLoader
+                    .getInstance()
+                    .getConfigDir()
+                    .resolve("BetterDarkMode")
+                    .resolve("selected_color.conf");
+
+            if (!Files.exists(saveFile.getParent())) {
+                Files.createDirectory(saveFile.getParent());
+            }
+
+            if (!Files.exists(saveFile)) {
+                Files.createFile(saveFile);
+            }
+
             return saveFile;
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,17 +42,15 @@ public class Util {
 
     public static void readSaveFile() {
         Path saveFile = Util.getSaveFile();
+
         if (saveFile == null) {
             BetterDarkMode.LOGGER.info("Save file doesn't exist and couldn't create it.");
             return;
         }
+
         try (BufferedReader reader = Files.newBufferedReader(saveFile)) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.matches("\\d+")) {
-                    Configs.SELECTED_COLOR = Integer.parseInt(line.trim());
-                }
-            }
+            String line = reader.readLine();
+            Configs.SELECTED_COLOR = Integer.parseInt(line.trim());
             BetterDarkMode.LOGGER.info("Successfully read save file.");
         } catch (IOException | NumberFormatException e) {
             BetterDarkMode.LOGGER.error("Failed to read save file.");
@@ -69,22 +73,7 @@ public class Util {
         }
     }
 
-    public static void sendMessage(Text message) {
-        MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(message);
-    }
-
-    public static ClientPlayerEntity getPlayer() {
-        return MinecraftClient.getInstance().player;
-    }
-
     public static Text getCleanText(Text text) {
-        StringBuilder builder = new StringBuilder();
-        boolean skipNext = false;
-        for (char c : text.getString().toCharArray()) {
-            if (skipNext) skipNext = false;
-            else if (c == '§') skipNext = true;
-            else builder.append(c);
-        }
-        return new LiteralText(builder.toString());
+        return new LiteralText(text.getString().replaceAll("§.", ""));
     }
 }
