@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "better-dark-mode",
+  "version": "${version}",
+  "name": "Better Dark Mode",
+  "description": "Small mod to fix custom named blocks when using some gui changing resource packs",
+  "authors": [
+    "Crec0"
+  ],
+  "contact": {
+    "sources": "https://github.com/Crec0/BetterDarkMode",
+    "issues": "https://github.com/Crec0/BetterDarkMode/issues",
+    "discord": "https://discord.gg/UpX7PkPm6t"
+  },
+  "license": "MIT",
+  "icon": "assets/better-dark-mode/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "dev.crec.betterdarkmode.BetterDarkMode"
+    ]
+  },
+  "mixins": [
+    "better-dark-mode.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "^1.19"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.crec.betterdarkmode.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "ScreensMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
