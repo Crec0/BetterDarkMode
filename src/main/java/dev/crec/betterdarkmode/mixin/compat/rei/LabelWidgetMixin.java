@@ -7,16 +7,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Pseudo
-@Mixin(targets = "me.shedaniel.rei.impl.client.gui.widget.basewidgets.LabelWidget", remap = false)
+@Mixin(targets = { "me.shedaniel.rei.impl.client.gui.widget.basewidgets.LabelWidget" }, remap = false)
 public class LabelWidgetMixin {
 	@ModifyArg(
-		method = "render",
+		method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V",
 		at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/client/gui/Font;draw(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I",
 			remap = true
 		),
-		remap = false,
+		remap = true,
 		index = 4
 	)
 	private int onRenderText(int i) {
@@ -25,13 +25,13 @@ public class LabelWidgetMixin {
 
 
 	@ModifyArg(
-		method = "render",
+		method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V",
 		at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/client/gui/Font;drawShadow(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/util/FormattedCharSequence;FFI)I",
 			remap = true
 		),
-		remap = false,
+		remap = true,
 		index = 4
 	)
 	private int onRenderShadow(int i) {
