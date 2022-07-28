@@ -42,6 +42,7 @@ public final class CommandBetterDarkMode {
 
 	private static int setColor(final int color) {
 		BetterDarkMode.selectedColor = color;
+		BetterDarkMode.writeSave();
 		return 1;
 	}
 }
