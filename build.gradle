@@ -22,6 +22,8 @@ dependencies {
 
     // Fabric API. This is technically optional, but you probably want it anyway.
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    modImplementation files("run/mods/RoughlyEnoughItems-9.1.518.jar")
+    modImplementation files("run/mods/wraith-alloy-forgery-2.0.15+1.19.jar")
 }
 
 processResources {
