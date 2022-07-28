@@ -26,9 +26,7 @@ public class BetterDarkMode implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
-			CommandBetterDarkMode.register(dispatcher);
-		});
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> CommandBetterDarkMode.register(dispatcher));
 		ClientLifecycleEvents.CLIENT_STARTED.register(mc -> readSave());
 		ClientLifecycleEvents.CLIENT_STOPPING.register(mc -> writeSave());
 	}
@@ -44,7 +42,7 @@ public class BetterDarkMode implements ModInitializer {
 			}
 
 			List<String> data = Files.readAllLines(saveFile);
-			if (data.size() > 1) {
+			if (data.size() > 0) {
 				selectedColor = Integer.parseInt(data.get(0).trim(), 16);
 			}
 
