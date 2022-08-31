@@ -3,12 +3,13 @@ package dev.crec.betterdarkmode.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import dev.crec.betterdarkmode.BetterDarkMode;
-import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.network.chat.Component;
+import net.fabricmc.fabric.api.client.command.v1.FabricClientCommandSource;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.argument;
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.argument;
+import static net.fabricmc.fabric.api.client.command.v1.ClientCommandManager.literal;
+
 
 public final class CommandBetterDarkMode {
 	public static void register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
@@ -33,8 +34,8 @@ public final class CommandBetterDarkMode {
 		int color = Integer.parseInt(hex, 16);
 		setColor(color);
 		context.getSource().sendFeedback(
-			Component.literal("Color set to: ").append(
-				Component.literal(hex).withStyle(Style.EMPTY.withColor(color))
+			new TextComponent("Color set to: ").append(
+				new TextComponent(hex).withStyle(Style.EMPTY.withColor(color))
 			)
 		);
 		return 1;

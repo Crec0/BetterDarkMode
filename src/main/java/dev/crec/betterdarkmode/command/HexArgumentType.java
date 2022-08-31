@@ -8,7 +8,7 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 import net.minecraft.commands.SharedSuggestionProvider;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class HexArgumentType implements ArgumentType<String> {
 	private static final Collection<String> EXAMPLES = Arrays.asList("404040", "ECF0F1");
 	private final DynamicCommandExceptionType WRONG_HEX = new DynamicCommandExceptionType(
-		component -> Component.translatable("Invalid hex value: %s", component)
+		component -> new TranslatableComponent("Invalid hex value: %s", component)
 	);
 	private static final Pattern VALID_HEX = Pattern.compile("^[0-9a-f]{1,6}$");
 	private static final Pattern COMPLETE_HEX_COLOR = Pattern.compile("^[0-9a-f]{6}$");

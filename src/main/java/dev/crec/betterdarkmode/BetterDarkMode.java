@@ -2,10 +2,11 @@ package dev.crec.betterdarkmode;
 
 import dev.crec.betterdarkmode.command.CommandBetterDarkMode;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import net.fabricmc.fabric.api.client.command.v1.ClientCommandManager;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,13 +27,13 @@ public class BetterDarkMode implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> CommandBetterDarkMode.register(dispatcher));
+		CommandBetterDarkMode.register(ClientCommandManager.DISPATCHER);
 		ClientLifecycleEvents.CLIENT_STARTED.register(mc -> readSave());
 		ClientLifecycleEvents.CLIENT_STOPPING.register(mc -> writeSave());
 	}
 
 	public static Component cleanText(Component original) {
-		return Component.literal(original.getString().replaceAll("§.", "")).withStyle(original.getStyle());
+		return new TextComponent(original.getString().replaceAll("§.", "")).withStyle(original.getStyle());
 	}
 
 	public static void readSave() {
